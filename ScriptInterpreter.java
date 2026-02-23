@@ -19,10 +19,6 @@ public class ScriptInterpreter {
         this.trace = trace;
     }
 
-    /**
-     * Ejecuta el programa (scriptSig + scriptPubKey).
-     * Devuelve true si termina sin error y la cima de la pila es verdadera (≠0).
-     */
     public boolean execute(List<Instruction> program) {
         stack.clear();
 
@@ -42,7 +38,7 @@ public class ScriptInterpreter {
     private void apply(Instruction ins) {
         Opcode op = ins.getOpcode();
 
-        // PUSHDATA: empuja bytes directos
+        // empuja bytes directos
         if (op == Opcode.PUSHDATA) {
             stack.push(ins.getData());
             return;
@@ -124,7 +120,6 @@ public class ScriptInterpreter {
     // ----------------- Helpers de pila y tipos -----------------
 
     private void pushInt(int n) {
-        // Simple fase 1: un byte (1..16)
         stack.push(new byte[]{(byte) n});
     }
 
@@ -147,10 +142,8 @@ public class ScriptInterpreter {
         return new byte[]{(byte) (b ? 1 : 0)};
     }
 
-    // ----------------- Trace / impresión -----------------
-
     private String stackToString() {
-        List<byte[]> list = new ArrayList<byte[]>(stack); // top -> bottom en ArrayDeque iterando
+        List<byte[]> list = new ArrayList<byte[]>(stack);
         StringBuilder sb = new StringBuilder();
         sb.append("[TOP ");
         for (int i = 0; i < list.size(); i++) {
