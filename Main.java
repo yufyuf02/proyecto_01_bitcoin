@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/** Punto de entrada del intérprete. Parsea los argumentos y ejecuta el script. */
 public class Main {
 
     public static void main(String[] args) {
