@@ -1,3 +1,4 @@
+/** Representa una instrucción del script: un opcode con su dato opcional. */
 public class Instruction {
 
     private final Opcode opcode;
